@@ -1,5 +1,6 @@
 package pages;
 
+import commons.DriverUtility;
 import commons.GlobalVariables;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -44,6 +45,8 @@ public class FacebookBirthdayPage {
         } catch (NoSuchElementException | TimeoutException e) {
             System.out.println("Sorry, you don't have any friends who has birthday today. Try this app again tomorrow!");
             e.printStackTrace();
+            DriverUtility.quitSession(driver);
+            System.exit(0);
         }
     }
 
