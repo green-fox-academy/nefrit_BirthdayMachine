@@ -14,8 +14,10 @@ public class FacebookBirthdayPage {
 
 
     private static final String BIRTHDAY_PAGE_URL = "https://www.facebook.com/events/birthdays/";
-    private static final By PEOPLE_WHO_HAVE_BIRTHDAY_TODAY3 = By.xpath("//*[@id=\"birthdays_content\"]/div[1]/div[2]/ul");
-    private static final ByChained PEOPLE_WHO_HAVE_BIRTHDAY_TODAY = new ByChained(By.id("birthdays_content"),By.className("_tzl"));
+    private static final By PEOPLE_WHO_HAVE_BIRTHDAY_TODAY3 = By.xpath("//*[@id=\"birthdays_content\"]/div[1]/div[2]/ul[1]//div[@class='_tzn lfloat _ohe']/a");
+    private static final By XXXXX = By.xpath("//*div[@class='clearfix']//a");
+    private static final ByChained FRIEND_WHO_HAS_BIRTHDAY_TODAY = new ByChained(By.className("_tzn lfloat _ohe"),By.tagName("a"));
+
 
     private WebDriverWait wait;
     private WebDriver driver;
@@ -35,6 +37,10 @@ public class FacebookBirthdayPage {
         List<WebElement> listOfPeople = driver.findElements(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY3);
         System.out.println(listOfPeople.size());
 
+        for (WebElement elem :
+                listOfPeople) {
+            System.out.println(elem.getText());
+        }
 
     }
 
