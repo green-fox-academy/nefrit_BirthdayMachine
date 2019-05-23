@@ -87,8 +87,34 @@ public class EKepeslapPage {
         sendPostcard();
     }
 
-    public static void navigateToEKepeslap() {
+    public void navigateToEKepeslap() {
         driver.get(URL);
+    }
+
+    public void sendPostCardToFriendsEmailAddress(String postcardTitle, String postcardBodyMessage, String signature,
+                                                  String receiverUsername, String receiverEmail, String ownUsername,
+                                                  String ownEmail) {
+        ((JavascriptExecutor) driver)
+                .executeScript(String.format(
+                        "document.querySelector(\"#tartalom > table > tbody > tr > td.fo > div > ul > li:nth-child(%s) > a > img\").click()",
+                        1 + (int)(Math.random() * 24)
+                ));
+        fillPostcardTitle(postcardTitle);
+        fillPostcardBody(postcardBodyMessage);
+        selectQuote();
+        fillSignature(signature);
+        fillReceiverData(receiverUsername, receiverEmail);
+        fillOwnData(ownUsername, ownEmail);
+        selectPostcardFontColor();
+        selectPostcardFontType();
+        selectPostcardFontSize();
+        selectPostcardBackground();
+        selectPostcardBackgroundColor();
+        selectPostcardStamp();
+        selectPostcardBackground();
+        selectPostcardSong();
+        submitPostcard();
+        sendPostcard();
     }
 
     private static void fillPostcardTitle(String text) {
