@@ -7,24 +7,37 @@ public class MessageBuilder {
     private String eventTitle;
     private String restaurantName;
     private String tripPlanUrl;
-    private String dressingTip;
+    private String dressingSuggestion;
 
-    public MessageBuilder(String musicVideoLink, String eventTitle, String restaurantName, String tripPlanUrl, String dressingTip) {
+    public MessageBuilder(String musicVideoLink, String eventTitle, String restaurantName, String tripPlanUrl, int temperature) {
         this.musicVideoLink = musicVideoLink;
         this.eventTitle = eventTitle;
         this.restaurantName = restaurantName;
         this.tripPlanUrl = tripPlanUrl;
-        this.dressingTip = dressingTip;
+        this.dressingSuggestion = buildDressingSuggestionMessage(temperature);
     }
 
     public void setGreetingMessage(){
         greetingMessage = "Happy birthday, my friend! \n" +
                 "On this special day I would like to cheer you up with this sweet little song :) \n" +
                 musicVideoLink + "\n" +
-                "If You want to go out tonight, ";
+                "If You want to go out tonight, I can suggest You this event: " + eventTitle +
+                "\n" + "And after that we can have a bite at " + restaurantName + ". " + dressingSuggestion;
     }
 
     public String getGreetingMessage() {
         return greetingMessage;
+    }
+
+    public String buildDressingSuggestionMessage(int temperature){
+        if(temperature < 5){
+            return "Bring your winter coat, it will be really cold!";
+        } else if(temperature >= 5 && temperature < 15){
+            return "Bring some warm clothes, it's going to be cold tonight.";
+        } else if(temperature >= 15 && temperature < 22){
+            return "Bring a sweater, the weather is going to be cool tonight.";
+        } else {
+            return "Dress lightly, the weather is going to be pleasant tonight.";
+        }
     }
 }
