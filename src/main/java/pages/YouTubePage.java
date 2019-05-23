@@ -16,6 +16,7 @@ public class YouTubePage {
     private String resultUrl;
 
     private By searchField = By.xpath("//input[@id=\"search\"]");
+    private By filterButton = By.id("filter-menu");
     private By firstResult = By.xpath("//*[@id=\"video-title\"]");
 
     public YouTubePage(WebDriver driver) {
@@ -32,6 +33,7 @@ public class YouTubePage {
     }
 
     public void setResultUrl(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(filterButton));
         resultUrl = wait.until(ExpectedConditions. visibilityOfElementLocated(firstResult)).getAttribute("href");
     }
 
