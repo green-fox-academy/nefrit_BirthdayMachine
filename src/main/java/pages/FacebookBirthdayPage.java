@@ -28,6 +28,14 @@ public class FacebookBirthdayPage {
         this.listOfNamesOfPeople = new ArrayList<>();
     }
 
+    public List<WebElement> getListOfWebelementsOfPeople() {
+        return listOfWebelementsOfPeople;
+    }
+
+    public List<String> getListOfNamesOfPeople() {
+        return listOfNamesOfPeople;
+    }
+
     public void navigateToBirthdayPage() {
         driver.get(BIRTHDAY_PAGE_URL);
     }
@@ -45,7 +53,14 @@ public class FacebookBirthdayPage {
         }
     }
 
-
+    public void clickOnSelectedName(String nameToClickOn) {
+        for (WebElement friend :
+                listOfWebelementsOfPeople) {
+            if (nameToClickOn.equalsIgnoreCase(friend.getText())) {
+                friend.click();
+            }
+        }
+    }
 
 }
 
