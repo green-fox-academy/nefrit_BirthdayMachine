@@ -1,4 +1,7 @@
+import commons.DriverUtility;
+import commons.PropertyUtility;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
@@ -36,4 +39,47 @@ public class PostcardSender {
     private static final By postcardStampMenu = By.xpath("//*[@id=\"tartalom\"]/table/tbody/tr/td[1]/form/div/div[14]/div[1]/label/select");
     private static final By postcardBackgroundMenu = By.xpath("//*[@id=\"tartalom\"]/table/tbody/tr/td[1]/form/div/div[15]/div[1]/label/select");
     private static final By postcardBackgroundSong = By.xpath("//*[@id=\"tartalom\"]/table/tbody/tr/td[1]/form/div/div[17]/div/label/select");
+
+
+    PostcardSender(WebDriver extDriver, String postcardTitle, String postcardBodyMessage, String signature,
+              String receiverUsername, String receiverEmail, String ownUsername, String ownEmail) {
+
+        /*
+        postcardBodyMessage can contain emojis:
+
+                    The syntax is : $[1-47] where the number is the emoji type from the emojis array.
+
+                    e.g.: passing "happy $1" will look like this: "happy 🙂"
+
+                    DO NOT write two consecutive emojis, like "happy wink $1 $4" because the message will look weird.
+         */
+
+        driver = extDriver;
+        PropertyUtility.getPropertyFileContent(config);
+        driver = DriverUtility.startUp(driver, config, false, true, true);
+        driver.get("https://www.e-kepeslap.com/kepeslapkuldes-13-szuletesnapi-kepeslapok.html");
+        ((JavascriptExecutor) driver)
+                .executeScript(String.format(
+                        "document.querySelector(\"#tartalom > table > tbody > tr > td.fo > div > ul > li:nth-child(%s) > a > img\").click()",
+                        1 + (int)(Math.random() * 24)
+                ));
+        fillPostcardTitle(postcardTitle);
+        fillPostcardBody(postcardBodyMessage);
+        selectQuote();
+        fillSignature(signature);
+        fillReceiverData(receiverUsername, receiverEmail);
+        fillOwnData(ownUsername, ownEmail);
+        selectPostcardFontColor();
+        selectPostcardFontType();
+        selectPostcardFontSize();
+        selectPostcardBackground();
+        selectPostcardBackgroundColor();
+        selectPostcardStamp();
+        selectPostcardBackground();
+        selectPostcardSong();
+        submitPostcard();
+        sendPostcard();
+
+    }
+
 }
