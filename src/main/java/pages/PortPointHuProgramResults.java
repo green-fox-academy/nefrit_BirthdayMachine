@@ -10,6 +10,7 @@ public class PortPointHuProgramResults {
 
     private WebDriverWait wait;
     private WebDriver driver;
+    private String searchPageName = "Keresés";
     private By resultOrderPopular = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
     private By firstResult = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
     private By address = By.className("address");
@@ -22,7 +23,7 @@ public class PortPointHuProgramResults {
     }
 
     public void chooseMostPopularEvent() {
-        wait.until(ExpectedConditions.titleIs("Keresés"));
+        wait.until(ExpectedConditions.titleIs(searchPageName));
         driver.findElement(resultOrderPopular).click();
         driver.findElement(firstResult).click();
     }

@@ -13,6 +13,7 @@ public class PortPointHu {
 
     private WebDriverWait wait;
     private WebDriver driver;
+    private String portPointHuUrl = "https://port.hu/";
     private By programSearchFrom = By.id("top-search-form");
     private By cityChooser = By.xpath("//form[@id='top-search-form']/ul/li[2]/a/span");
     private By programType = By.xpath("//form[@id='top-search-form']/ul/li[3]/a/span");
@@ -26,7 +27,7 @@ public class PortPointHu {
     }
 
     public void openPortPointHu() {
-        driver.get("https://port.hu/");
+        driver.get(portPointHuUrl);
     }
 
     public void searchForProgram(PortProgramType portProgramType, String city) {
