@@ -1,6 +1,6 @@
 package enums;
 
-public enum PortProgramOptions {
+public enum PortProgramType {
 
     TVEVENT("Tv"),
     CINEMAEVENT("Mozi"),
@@ -13,7 +13,7 @@ public enum PortProgramOptions {
 
     private final String value;
 
-    PortProgramOptions(String value) {
+    PortProgramType(String value) {
         this.value = value;
     }
 
