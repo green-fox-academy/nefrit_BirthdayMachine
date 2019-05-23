@@ -32,8 +32,7 @@ public class YouTubePage {
     }
 
     public void setResultUrl(){
-        wait.until(ExpectedConditions.elementToBeClickable(firstResult)).click();
-        resultUrl = driver.getCurrentUrl();
+        resultUrl = wait.until(ExpectedConditions. visibilityOfElementLocated(firstResult)).getAttribute("href");
     }
 
     public String getResultUrl() {

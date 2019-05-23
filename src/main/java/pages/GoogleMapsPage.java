@@ -39,8 +39,8 @@ public class GoogleMapsPage {
 
     public void planTripWithPublicTransport(String departureLocation, String arrivalLocation){
         wait.until(ExpectedConditions.elementToBeClickable(PUBLIC_TRANSPORT_BUTTON)).click();
-        WebElement departureField = wait.until(ExpectedConditions.visibilityOfElementLocated(this.DEPARTURE_LOCATION));
-        WebElement arrivalField = wait.until(ExpectedConditions.visibilityOfElementLocated(this.ARRIVAL_LOCATION));
+        WebElement departureField = wait.until(ExpectedConditions.visibilityOfElementLocated(DEPARTURE_LOCATION));
+        WebElement arrivalField = wait.until(ExpectedConditions.visibilityOfElementLocated(ARRIVAL_LOCATION));
         departureField.clear();
         departureField.sendKeys(departureLocation);
         arrivalField.clear();

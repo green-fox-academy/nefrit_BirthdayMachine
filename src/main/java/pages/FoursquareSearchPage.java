@@ -37,7 +37,7 @@ public class FoursquareSearchPage {
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
     }
 
-    public void setFirstResultAddress(){
+    public void setRestaurantName(){
         restaurantName = wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultLink)).getText();
     }
 
