@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PortPointHuProgramResults {
+public class PortHuProgramResults {
 
     private WebDriverWait wait;
     private WebDriver driver;
@@ -22,7 +22,7 @@ public class PortPointHuProgramResults {
     private By eventTitleBy = By.className("title");
     private By eventStartTime = By.xpath("(//div[@class='showtime-box']//span)[2]");
 
-    public PortPointHuProgramResults(WebDriver driver) {
+    public PortHuProgramResults(WebDriver driver) {
         this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
         this.driver = driver;
     }

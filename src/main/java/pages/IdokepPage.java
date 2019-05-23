@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class Idokep {
+public class IdokepPage {
 
     private WebDriverWait wait;
     private WebDriver driver;
@@ -21,7 +21,7 @@ public class Idokep {
     private By partOfTheDayColumns = By.xpath("//*[@class='harminchat']//*[@class='napszak']");
     private By temperatureColumns = By.xpath("//*[@class='harminchat']//*[@class='homerseklet']");
 
-    public Idokep(WebDriver driver) {
+    public IdokepPage(WebDriver driver) {
         this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
         this.driver = driver;
     }

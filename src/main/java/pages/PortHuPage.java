@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-public class PortPointHu {
+public class PortHuPage {
 
     private WebDriverWait wait;
     private WebDriver driver;
@@ -21,7 +21,7 @@ public class PortPointHu {
     private String defaultCity = "Budapest";
 
 
-    public PortPointHu(WebDriver driver) {
+    public PortHuPage(WebDriver driver) {
         this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
         this.driver = driver;
     }

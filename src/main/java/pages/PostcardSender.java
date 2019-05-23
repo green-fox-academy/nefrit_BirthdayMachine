@@ -1,3 +1,5 @@
+package pages;
+
 import commons.DriverUtility;
 import commons.GlobalVariables;
 import commons.PropertyUtility;
@@ -14,8 +16,6 @@ import java.util.Map;
 
 public class PostcardSender {
 
-    private static WebDriver driver;
-    private static Map<String, String> config = new HashMap<>();
     private static final String[] emojis = new String[] {
             " (_mosoly_) ", " (_nevet_) ", " (_szomoru_) ", " (_kacsint_) ", " (_nyelv_) ",
             " (_csodalkozo_) ", " (_sir_) ", " (_szemuveg_) ", " (_alszom_) ", " (_szarkasztikus_) ",
@@ -45,6 +45,8 @@ public class PostcardSender {
     private static final By postcardBackgroundMenu = By.xpath("//*[@id=\"tartalom\"]/table/tbody/tr/td[1]/form/div/div[15]/div[1]/label/select");
     private static final By postcardBackgroundSong = By.xpath("//*[@id=\"tartalom\"]/table/tbody/tr/td[1]/form/div/div[17]/div/label/select");
 
+    private static WebDriver driver;
+    private static Map<String, String> config = new HashMap<>();
 
     PostcardSender(WebDriver extDriver, String postcardTitle, String postcardBodyMessage, String signature,
               String receiverUsername, String receiverEmail, String ownUsername, String ownEmail) {
