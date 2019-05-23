@@ -2,10 +2,8 @@ package pages;
 
 import commons.GlobalVariables;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.pagefactory.ByChained;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,6 +23,8 @@ public class FacebookProfilePage {
     public FacebookProfilePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
+        this.emailAddress = "";
+        this.placeOfResidence = "";
     }
 
     public String getEmailAddress() {
@@ -40,24 +40,25 @@ public class FacebookProfilePage {
         wait.until(ExpectedConditions.elementToBeClickable(ABOUT_BUTTON)).click();
     }
 
-    public void getFriendEmailAddress() {
-        emailAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_ADDRESS)).getText();
+    public void getFriendEmailAddressOnContactPage() {
+        this.emailAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_ADDRESS)).getText();
         System.out.println(emailAddress);
     }
 
-    public void getFriendPlaceOfResidence() {
-        placeOfResidence = wait.until(ExpectedConditions.visibilityOfElementLocated(PLACE_OF_RESIDENCE)).getText();
+    public void getFriendPlaceOfResidenceOnContactPage() {
+        this.placeOfResidence = wait.until(ExpectedConditions.visibilityOfElementLocated(PLACE_OF_RESIDENCE)).getText();
         System.out.println(placeOfResidence);
     }
 
-    public void clickOnMessageButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(MESSAGE_BUTTON)).click();
-    }
 
     public void sendMessageToFriend(String finalMessageToFriend) {
+        clickOnMessageButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(MESSAGE_FIELD));
         driver.findElement(MESSAGE_FIELD).sendKeys(finalMessageToFriend + Keys.ENTER);
     }
 
+    private void clickOnMessageButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(MESSAGE_BUTTON)).click();
+    }
 
 }
