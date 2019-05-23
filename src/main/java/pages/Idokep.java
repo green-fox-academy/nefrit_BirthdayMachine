@@ -12,8 +12,11 @@ public class Idokep {
 
     private WebDriverWait wait;
     private WebDriver driver;
+
     private String idokepUrl = "https://www.idokep.hu/";
     private String partOfTheDay = "ma este";
+    private int temperature;
+
     private By detailsLink = By.linkText("részletek");
     private By partOfTheDayColumns = By.xpath("//*[@class='harminchat']//*[@class='napszak']");
     private By temperatureColumns = By.xpath("//*[@class='harminchat']//*[@class='homerseklet']");
@@ -27,7 +30,7 @@ public class Idokep {
         driver.get(idokepUrl);
     }
 
-    public int getEveningTemperature() {
+    public void setTemperature() {
         driver.findElement(detailsLink).click();
         List<WebElement> columnPartOfTheDay = driver.findElements(partOfTheDayColumns);
         int numberOfColumn = 0;
@@ -35,7 +38,11 @@ public class Idokep {
             numberOfColumn++;
         }
         String eveningTemperature = driver.findElements(temperatureColumns).get(numberOfColumn).getText();
-        int temperature = Integer.parseInt(eveningTemperature.split(" ")[0]);
+        temperature = Integer.parseInt(eveningTemperature.split(" ")[0]);
+    }
+
+    public int getTemperature() {
         return temperature;
     }
+
 }

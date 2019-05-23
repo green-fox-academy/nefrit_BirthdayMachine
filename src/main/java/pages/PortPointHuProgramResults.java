@@ -10,11 +10,16 @@ public class PortPointHuProgramResults {
 
     private WebDriverWait wait;
     private WebDriver driver;
+
     private String searchPageName = "Keresés";
+    private String eventAddress;
+    private String eventTitle;
+    private String evenStartTime;
+
     private By resultOrderPopular = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
     private By firstResult = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
     private By address = By.className("address");
-    private By eventTitle = By.className("title");
+    private By eventTitleBy = By.className("title");
     private By eventStartTime = By.xpath("(//div[@class='showtime-box']//span)[2]");
 
     public PortPointHuProgramResults(WebDriver driver) {
@@ -28,18 +33,30 @@ public class PortPointHuProgramResults {
         driver.findElement(firstResult).click();
     }
 
-    public String getAddress() {
-        return driver.findElement(address).getText();
+    public void setEventAddress() {
+        eventAddress = driver.findElement(address).getText();
+    }
+
+    public void setEventTitle() {
+        eventTitle = driver.findElement(eventTitleBy).getText();
+    }
+
+    public void setEventStartTime() {
+        String startTime = driver.findElement(eventStartTime).getText();
+        String[] startTimeArray = startTime.split(" ");
+        evenStartTime = startTimeArray[startTimeArray.length - 1];
+    }
+
+    public String getEventAddress() {
+        return eventAddress;
     }
 
     public String getEventTitle() {
-        return driver.findElement(eventTitle).getText();
+        return eventTitle;
     }
 
-    public String getEventStartTime() {
-        String startTime= driver.findElement(eventStartTime).getText();
-        String[] startTimeArray = startTime.split(" ");
-        return startTimeArray[startTimeArray.length-1];
+    public String getEvenStartTime() {
+        return evenStartTime;
     }
 }
 
