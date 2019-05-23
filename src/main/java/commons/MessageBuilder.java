@@ -20,9 +20,9 @@ public class MessageBuilder {
     public void setGreetingMessage(){
         greetingMessage = "Happy birthday, my friend! \n" +
                 "On this special day I would like to cheer you up with this sweet little song :) \n" +
-                musicVideoLink + "\n" +
-                "If You want to go out tonight, I can suggest You this event: " + eventTitle +
-                "\n" + "And after that we can have a bite at " + restaurantName + ". " + dressingSuggestion;
+                musicVideoLink + "\n" + "If You want to go out tonight, I can suggest You this event: " + eventTitle +
+                "\n" + "And after that we can have a bite at " + restaurantName + ", and travel there like this: " +
+                tripPlanUrl + ". " + dressingSuggestion + " Let me know how you feel about this. :)";
     }
 
     public String getGreetingMessage() {
