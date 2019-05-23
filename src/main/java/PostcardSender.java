@@ -1,8 +1,13 @@
 import commons.DriverUtility;
+import commons.GlobalVariables;
 import commons.PropertyUtility;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,6 +85,137 @@ public class PostcardSender {
         submitPostcard();
         sendPostcard();
 
+    }
+
+    private static void fillPostcardTitle(String text) {
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(postcardTitle)).sendKeys(text);
+    }
+
+    private static void fillPostcardBody(String text) {
+        text = encodeEmojis(text);
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(postcardBody)).sendKeys(text);
+    }
+
+    private static void fillSignature(String text) {
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(signatureField)).sendKeys(text);
+    }
+
+    private static void fillReceiverData(String name, String email) {
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(receiverNameField)).sendKeys(name);
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(receiverEmailField)).sendKeys(email);
+    }
+
+    private static void fillOwnData(String name, String email) {
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(ownNameField)).sendKeys(name);
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(ownEmailField)).sendKeys(email);
+    }
+
+    private static void selectQuote() {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -2000)");
+        selectFromMenu(quoteMenu, 48);
+    }
+
+    private static void selectPostcardFontColor() {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -500)");
+        selectFromMenu(postcardFontColorMenu, 61);
+    }
+
+    private static void selectPostcardFontType() {
+        selectFromMenu(postcardFontTypeMenu, 16);
+    }
+
+    private static void selectPostcardFontSize() {
+        selectFromMenu(postcardFontSizeMenu, 3);
+    }
+
+    private static void selectPostcardBackgroundColor() {
+        selectFromMenu(postcardBackgroundColorMenu, 61);
+    }
+
+    private static void selectPostcardStamp() {
+        selectFromMenu(postcardStampMenu, 44);
+    }
+
+    private static void selectPostcardBackground() {
+        selectFromMenu(postcardBackgroundMenu, 129);
+    }
+
+    private static void selectPostcardSong() {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -500)");
+        selectFromMenu(postcardBackgroundSong, 64);
+    }
+
+    private static void submitPostcard() {
+        ((JavascriptExecutor) driver)
+                .executeScript("document.querySelector(\"#tartalom > table > tbody > tr > td.fo > form > div > div:nth-child(23) > input\").click()");
+    }
+
+    private static void sendPostcard() {
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(
+                        ExpectedConditions.and(
+                                ExpectedConditions.presenceOfElementLocated(sendPostcardButton),
+                                ExpectedConditions.elementToBeClickable(sendPostcardButton)
+                        )
+                );
+        ((JavascriptExecutor) driver)
+                .executeScript("document.querySelector(\"body > div.center > ul > li:nth-child(1) > form > input.gombkek\").click()");
+    }
+
+    private static String encodeEmojis(String text) {
+        while (text.contains("$")) {
+            int emojiCode;
+            String charCodes = "";
+            int startCodeIndex = text.indexOf('$');
+            int charCodeLength = startCodeIndex + 2;
+
+            for (int i = 1; i < 3; i++) {
+                int c = text.charAt(text.indexOf('$') + i);
+                if (c > 48 && c < 58) {
+                    charCodes += (char) c;
+                    charCodeLength += 1;
+                }
+            }
+
+            try {
+                emojiCode = Integer.parseInt(charCodes);
+                if (emojiCode > -1 && emojiCode < 48) {
+                    text = text.substring(0, startCodeIndex - 1) + emojis[emojiCode] + text.substring(charCodeLength);
+                }
+            }
+            catch (NumberFormatException e) {
+                System.out.println(charCodes + " IS NOT A VALID EMOJI CODE");
+            }
+        }
+
+        return text;
+    }
+
+    private static void selectFromMenu(By menu, int menuMaxIndex) {
+        new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT)
+                .until(
+                        ExpectedConditions.and(
+                                ExpectedConditions.presenceOfElementLocated(menu),
+                                ExpectedConditions.visibilityOfElementLocated(menu),
+                                ExpectedConditions.elementToBeClickable(menu)
+                        )
+                );
+
+        while (true) {
+            try {
+                new Select(driver.findElement(menu)).selectByIndex(1 + (int)(Math.random() * menuMaxIndex));
+                break;
+            } catch (ElementClickInterceptedException e) {
+                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -20)");
+            }
+        }
     }
 
 }
