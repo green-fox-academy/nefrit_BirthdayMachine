@@ -13,8 +13,7 @@ public class FoursquareSearchPage {
     private WebDriverWait wait;
 
     private final String url = "https://foursquare.com/city-guide";
-    private String city;
-    private String searchCategory;
+    private String firstResultAddress;
 
     private By cityInputField = By.id("headerLocationInput");
     private By categoryInputField = By.id("headerBarSearch");
@@ -38,8 +37,11 @@ public class FoursquareSearchPage {
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
     }
 
-    public String getHighestRankedSearchResultName(){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultLink)).getText();
+    public void setFirstResultAddress(){
+        firstResultAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultLink)).getText();
     }
 
+    public String getFirstResultAddress() {
+        return firstResultAddress;
+    }
 }
