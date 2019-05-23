@@ -11,14 +11,20 @@ public class FacebookProfilePage {
 
     private static final By ABOUT_BUTTON = By.xpath("//*[@id='fbTimelineHeadline']//a[@data-tab-key='about']");
     private static final By EMAIL_ADDRESS = By.xpath("//*[@data-overviewsection='contact_basic']//a[contains(@href,'mailto')]");
-    private String emailAddress;
+    private static final By MESSAGE_BUTTON = By.xpath("//*[@id='fbTimelineHeadline']//a[contains(@href,'/messages/')]");
 
+
+    private String emailAddress;
     private WebDriver driver;
     private WebDriverWait wait;
 
     public FacebookProfilePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     public void clickOnAboutButton() {
@@ -31,5 +37,8 @@ public class FacebookProfilePage {
         System.out.println(emailAddress);
     }
 
+    public void clickOnMessageButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(MESSAGE_BUTTON)).click();
+    }
 
 }
