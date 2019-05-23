@@ -33,6 +33,13 @@ public class PortPointHuProgramResults {
         driver.findElement(firstResult).click();
     }
 
+    public void setFields() {
+        setEventAddress();
+        setEventTitle();
+        setEventStartTime();
+    }
+
+
     public void setEventAddress() {
         eventAddress = driver.findElement(address).getText();
     }
