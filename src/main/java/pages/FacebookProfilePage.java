@@ -24,7 +24,7 @@ public class FacebookProfilePage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
         this.emailAddress = "";
-        this.placeOfResidence = "";
+        this.placeOfResidence = "Budapest";
     }
 
     public String getEmailAddress() {
@@ -40,11 +40,13 @@ public class FacebookProfilePage {
         wait.until(ExpectedConditions.elementToBeClickable(ABOUT_BUTTON)).click();
     }
 
+    //TODO: try-catch
     public void getFriendEmailAddressOnContactPage() {
         this.emailAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_ADDRESS)).getText();
         System.out.println(emailAddress);
     }
 
+    //TODO: try-catch
     public void getFriendPlaceOfResidenceOnContactPage() {
         this.placeOfResidence = wait.until(ExpectedConditions.visibilityOfElementLocated(PLACE_OF_RESIDENCE)).getText();
         System.out.println(placeOfResidence);
