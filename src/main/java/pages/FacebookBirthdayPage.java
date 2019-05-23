@@ -4,28 +4,32 @@ import commons.GlobalVariables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.ByChained;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FacebookBirthdayPage {
 
-
     private static final String BIRTHDAY_PAGE_URL = "https://www.facebook.com/events/birthdays/";
-    private static final By PEOPLE_WHO_HAVE_BIRTHDAY_TODAY3 = By.xpath("//*[@id=\"birthdays_content\"]/div[1]/div[2]/ul[1]//div[@class='_tzn lfloat _ohe']/a");
-    private static final By XXXXX = By.xpath("//*div[@class='clearfix']//a");
-    private static final ByChained FRIEND_WHO_HAS_BIRTHDAY_TODAY = new ByChained(By.className("_tzn lfloat _ohe"),By.tagName("a"));
+    private static final By PEOPLE_WHO_HAVE_BIRTHDAY_TODAY = By.xpath("//*[@id=\"birthdays_content\"]/div[1]/div[2]/ul[1]//div[@class='_tzn lfloat _ohe']/a");
 
-
+    private List<WebElement> listOfWebelementsOfPeople;
+    private List<String> listOfNamesOfPeople;
     private WebDriverWait wait;
     private WebDriver driver;
 
+    /*TODO: delete these reminders:
+    gettext -> get people's names
+
+    */
 
     public FacebookBirthdayPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
+        this.listOfWebelementsOfPeople = new ArrayList<>();
+        this.listOfNamesOfPeople = new ArrayList<>();
     }
 
     public void navigateToBirthdayPage() {
@@ -33,18 +37,18 @@ public class FacebookBirthdayPage {
     }
 
     public void getListOfPeopleWhoHaveBirthdayToday() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY3));
-        List<WebElement> listOfPeople = driver.findElements(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY3);
-        System.out.println(listOfPeople.size());
-
-        for (WebElement elem :
-                listOfPeople) {
-            System.out.println(elem.getText());
-        }
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY));
+        listOfWebelementsOfPeople = driver.findElements(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY);
+        System.out.println(listOfWebelementsOfPeople.size());
     }
 
-
+    public void getNamesOfPeopleWhoHaveBirthdayToday() {
+        for (WebElement friend :
+                listOfWebelementsOfPeople) {
+            listOfNamesOfPeople.add(friend.getText());
+        }
+        System.out.println(listOfNamesOfPeople.toString());
+    }
 
 
 }
