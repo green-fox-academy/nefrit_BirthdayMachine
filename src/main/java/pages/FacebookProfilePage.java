@@ -13,12 +13,12 @@ public class FacebookProfilePage {
 
     private static final By ABOUT_BUTTON = By.xpath("//*[@id='fbTimelineHeadline']//a[@data-tab-key='about']");
     private static final By EMAIL_ADDRESS = By.xpath("//*[@data-overviewsection='contact_basic']//a[contains(@href,'mailto')]");
+    private static final By PLACE_OF_RESIDENCE = By.xpath("//div[@data-overviewsection='places']//div[contains(text(),'Lives in ')]/a");
     private static final By MESSAGE_BUTTON = By.xpath("//*[@id='fbTimelineHeadline']//a[contains(@href,'/messages/')]");
     private static final By MESSAGE_FIELD = By.xpath("//div[contains(@class,'_5rpu') and @role='combobox']");
-    //private static final By MESSAGE_FIELD = By.xpath("//div[@class='fbNubFlyoutOuter']//div[@class='_1mf _1mj']/span/span");
-
 
     private String emailAddress;
+    private String placeOfResidence;
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -31,6 +31,10 @@ public class FacebookProfilePage {
         return emailAddress;
     }
 
+    public String getPlaceOfResidence() {
+        return placeOfResidence;
+    }
+
     public void clickOnAboutButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ABOUT_BUTTON));
         wait.until(ExpectedConditions.elementToBeClickable(ABOUT_BUTTON)).click();
@@ -39,6 +43,11 @@ public class FacebookProfilePage {
     public void getFriendEmailAddress() {
         emailAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_ADDRESS)).getText();
         System.out.println(emailAddress);
+    }
+
+    public void getFriendPlaceOfResidence() {
+        placeOfResidence = wait.until(ExpectedConditions.visibilityOfElementLocated(PLACE_OF_RESIDENCE)).getText();
+        System.out.println(placeOfResidence);
     }
 
     public void clickOnMessageButton() {
@@ -50,8 +59,5 @@ public class FacebookProfilePage {
         driver.findElement(MESSAGE_FIELD).sendKeys(finalMessageToFriend + Keys.ENTER);
     }
 
-    public void clickOnSendMessage() {
-
-    }
 
 }
