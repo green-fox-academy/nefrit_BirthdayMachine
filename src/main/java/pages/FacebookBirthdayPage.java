@@ -31,7 +31,7 @@ public class FacebookBirthdayPage {
         return listOfWebelementsOfPeople;
     }
 
-    public List<String> getListOfNamesOfPeople() {
+    public List<String> getListOfNamesOfFriends() {
         return listOfNamesOfPeople;
     }
 
@@ -39,17 +39,10 @@ public class FacebookBirthdayPage {
         driver.get(BIRTHDAY_PAGE_URL);
     }
 
-    public void getListOfPeopleWhoHaveBirthdayToday() {
+    public void getFriendsWhoHaveBirthdayTodayFromFacebok() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY));
         listOfWebelementsOfPeople = driver.findElements(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY);
-        System.out.println(listOfWebelementsOfPeople.size());
-    }
-
-    public void getNamesOfPeopleWhoHaveBirthdayToday() {
-        for (WebElement friend :
-                listOfWebelementsOfPeople) {
-            listOfNamesOfPeople.add(friend.getText());
-        }
+        collectNamesFromWebelements();
     }
 
     public void clickOnSelectedName(String nameToClickOn) {
@@ -59,6 +52,12 @@ public class FacebookBirthdayPage {
                 friend.click();
                 break;
             }
+        }
+    }
+
+    private void collectNamesFromWebelements() {
+        for (WebElement friend : listOfWebelementsOfPeople) {
+            listOfNamesOfPeople.add(friend.getText());
         }
     }
 }
