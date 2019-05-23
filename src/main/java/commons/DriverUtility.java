@@ -46,6 +46,7 @@ public class DriverUtility {
         } else if (configuration.get("headless").equals("no") || (configuration.get("headless").equals("custom") && !headlessMode)){
             options.setHeadless(false);
         }
+        options.addPreference("dom.webnotifications.enabled", false);
         driver = new FirefoxDriver(options);
 
         if (deleteAllCookies) {
