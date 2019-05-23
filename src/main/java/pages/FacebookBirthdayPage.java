@@ -20,10 +20,6 @@ public class FacebookBirthdayPage {
     private WebDriverWait wait;
     private WebDriver driver;
 
-    /*TODO: delete these reminders:
-    gettext -> get people's names
-
-    */
 
     public FacebookBirthdayPage(WebDriver driver) {
         this.driver = driver;
@@ -47,9 +43,9 @@ public class FacebookBirthdayPage {
                 listOfWebelementsOfPeople) {
             listOfNamesOfPeople.add(friend.getText());
         }
-        System.out.println(listOfNamesOfPeople.toString());
     }
 
+    
 
 }
 
