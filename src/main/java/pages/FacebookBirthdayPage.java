@@ -19,7 +19,7 @@ public class FacebookBirthdayPage {
     private List<String> listOfNamesOfPeople;
     private WebDriverWait wait;
     private WebDriver driver;
-    
+
     public FacebookBirthdayPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
