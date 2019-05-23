@@ -55,11 +55,8 @@ public class EKepeslapPage {
 
         /*
         postcardBodyMessage can contain emojis:
-
                     The syntax is : $[1-47] where the number is the emoji type from the emojis array.
-
                     e.g.: passing "happy $1" will look like this: "happy 🙂"
-
                     DO NOT write two consecutive emojis, like "happy wink $1 $4" because the message will look weird.
          */
 
@@ -88,6 +85,10 @@ public class EKepeslapPage {
         selectPostcardSong();
         submitPostcard();
         sendPostcard();
+    }
+
+    public static void navigateToEKepeslap() {
+        driver.get(URL);
     }
 
     private static void fillPostcardTitle(String text) {
