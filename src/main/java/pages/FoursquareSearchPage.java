@@ -1,7 +1,42 @@
 package pages;
 
-public class FoursquareSearch {
+import commons.GlobalVariables;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-    private static String url;
-    private static String city;
+public class FoursquareSearchPage {
+
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    private final String url = "https://foursquare.com/city-guide";
+    private String city;
+    private String searchCategory;
+
+    private By cityInputField = By.id("headerLocationInput");
+    private By categoryInputField = By.id("headerBarSearch");
+    private By submitButton = By.className("submitButton");
+
+    public FoursquareSearchPage(){
+        this.driver = driver;
+        this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
+    }
+
+    public void getFoursquareSearchPage(){
+        driver.get(url);
+    }
+
+    public void searchForCategoryAndCity(String category, String city){
+        WebElement cityField = wait.until(ExpectedConditions.visibilityOfElementLocated(cityInputField));
+        cityField.clear();
+        cityField.sendKeys(city);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(categoryInputField)).sendKeys(category);
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
+    }
+
+    
+
 }
