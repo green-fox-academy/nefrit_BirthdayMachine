@@ -31,6 +31,4 @@ public class AppManager {
         } while (chosenNumber <= 0 || chosenNumber > listOfFriends.size());
         chosenFriend = listOfFriends.get(chosenNumber - 1);
     }
-
-
 }

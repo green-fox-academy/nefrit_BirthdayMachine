@@ -6,7 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PortPointHuProgramResults {
+public class PortHuProgramResultsPage {
+
+    private static final By RESULT_ORDER_POPULAR = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
+    private static final By FIRST_RESULT = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
+    private static final By ADDRESS = By.className("address");
+    private static final By EVENT_TITLE_BY = By.className("title");
+    private static final By EVENT_START_TIME = By.xpath("(//div[@class='showtime-box']//span)[2]");
 
     private WebDriverWait wait;
     private WebDriver driver;
@@ -16,21 +22,16 @@ public class PortPointHuProgramResults {
     private String eventTitle;
     private String evenStartTime;
 
-    private By resultOrderPopular = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
-    private By firstResult = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
-    private By address = By.className("address");
-    private By eventTitleBy = By.className("title");
-    private By eventStartTime = By.xpath("(//div[@class='showtime-box']//span)[2]");
 
-    public PortPointHuProgramResults(WebDriver driver) {
-        this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
+    public PortHuProgramResultsPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
     }
 
     public void chooseMostPopularEvent() {
         wait.until(ExpectedConditions.titleIs(searchPageName));
-        driver.findElement(resultOrderPopular).click();
-        driver.findElement(firstResult).click();
+        driver.findElement(RESULT_ORDER_POPULAR).click();
+        driver.findElement(FIRST_RESULT).click();
     }
 
     public void setFields() {
@@ -39,17 +40,16 @@ public class PortPointHuProgramResults {
         setEventStartTime();
     }
 
-
     public void setEventAddress() {
-        eventAddress = driver.findElement(address).getText();
+        eventAddress = driver.findElement(ADDRESS).getText();
     }
 
     public void setEventTitle() {
-        eventTitle = driver.findElement(eventTitleBy).getText();
+        eventTitle = driver.findElement(EVENT_TITLE_BY).getText();
     }
 
     public void setEventStartTime() {
-        String startTime = driver.findElement(eventStartTime).getText();
+        String startTime = driver.findElement(EVENT_START_TIME).getText();
         String[] startTimeArray = startTime.split(" ");
         evenStartTime = startTimeArray[startTimeArray.length - 1];
     }
@@ -66,4 +66,3 @@ public class PortPointHuProgramResults {
         return evenStartTime;
     }
 }
-

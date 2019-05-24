@@ -20,15 +20,15 @@ public class FacebookLoginPage {
         this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
     }
 
-    public void navigateToFacebook() {
-        driver.get(FACEBOOK_URL);
-    }
-
     public void login(String userEmail, String userPassword) {
-        System.out.println("Logging into Facebook...");
+        navigateToFacebook();
         typeInEmail(userEmail);
         typeInPassword(userPassword);
         clickLogInButton();
+    }
+
+    private void navigateToFacebook() {
+        driver.get(FACEBOOK_URL);
     }
 
     private void typeInEmail(String email) {

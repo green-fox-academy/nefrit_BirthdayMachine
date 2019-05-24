@@ -9,14 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GooglePage {
 
+
+    private static final String URL = "https://www.google.com/";
+    private static final By SEARCH_FIELD = By.xpath("//*[@name=\"q\"]");
+    private static final By FIRST_RESULT_ADDRESS = By.xpath("//*[@id=\"rhs_block\"]//span[@class=\"LrzXr\"]");
+
     private WebDriver driver;
     private WebDriverWait wait;
-
-    private String url = "https://www.google.com/";
     private String resultAddress;
-
-    private By searchField = By.xpath("//*[@name=\"q\"]");
-    private By firstResultAddress = By.xpath("//*[@id=\"rhs_block\"]//span[@class=\"LrzXr\"]");
 
     public GooglePage(WebDriver driver) {
         this.driver = driver;
@@ -24,15 +24,15 @@ public class GooglePage {
     }
 
     public void getGooglePage(){
-        driver.get(url);
+        driver.get(URL);
     }
 
     public void searchText(String keywords){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(searchField)).sendKeys(keywords + Keys.ENTER);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_FIELD)).sendKeys(keywords + Keys.ENTER);
     }
 
     public void setResultAddress(){
-        resultAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultAddress)).getText();
+        resultAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(FIRST_RESULT_ADDRESS)).getText();
     }
 
     public String getResultAddress() {

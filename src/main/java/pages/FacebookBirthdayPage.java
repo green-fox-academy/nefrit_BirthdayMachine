@@ -2,7 +2,11 @@ package pages;
 
 import commons.DriverUtility;
 import commons.GlobalVariables;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,7 +17,7 @@ public class FacebookBirthdayPage {
 
     private static final String BIRTHDAY_PAGE_URL = "https://www.facebook.com/events/birthdays/";
     private static final By TODAYS_BIRTHDAY_INDICATOR = By.xpath("//*[@id=\"birthdays_today_card\"]");
-    private static final By PEOPLE_WHO_HAVE_BIRTHDAY_TODAY = By.xpath("//*[@id=\"birthdays_content\"]/div[1]/div[2]/ul[1]//div[@class='_tzn lfloat _ohe']/a");
+    private static final By PEOPLE_WHO_HAVE_BIRTHDAY_TODAY = By.xpath("//*[@id=\"birthdays_content\"]/div[1]/div[2]/ul[1]//div[contains(@class,'_tzn')]/a");
 
     private List<WebElement> listOfWebelementsOfPeople;
     private List<String> listOfNamesOfPeople;
@@ -27,19 +31,12 @@ public class FacebookBirthdayPage {
         this.listOfNamesOfPeople = new ArrayList<>();
     }
 
-    public List<WebElement> getListOfWebelementsOfPeople() {
-        return listOfWebelementsOfPeople;
-    }
-
     public List<String> getListOfNamesOfFriends() {
         return listOfNamesOfPeople;
     }
 
-    public void navigateToBirthdayPage() {
-        driver.get(BIRTHDAY_PAGE_URL);
-    }
-
     public void isThereBirthdayToday() {
+        navigateToBirthdayPage();
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(TODAYS_BIRTHDAY_INDICATOR));
         } catch (NoSuchElementException | TimeoutException e) {
@@ -53,6 +50,7 @@ public class FacebookBirthdayPage {
     public void getFriendsWhoHaveBirthdayTodayFromFacebok() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY));
         listOfWebelementsOfPeople = driver.findElements(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY);
+        System.out.println("webelementlista mérete: " + listOfWebelementsOfPeople.size());
         collectNamesFromWebelements();
     }
 
@@ -63,6 +61,10 @@ public class FacebookBirthdayPage {
                 break;
             }
         }
+    }
+
+    private void navigateToBirthdayPage() {
+        driver.get(BIRTHDAY_PAGE_URL);
     }
 
     private void collectNamesFromWebelements() {

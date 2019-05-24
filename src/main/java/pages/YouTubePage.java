@@ -9,32 +9,31 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class YouTubePage {
 
+    private static final String URL = "https://www.youtube.com/";
+    private static final By SEARCH_FIELD = By.xpath("//input[@id=\"search\"]");
+    private static final By FILTER_BUTTON = By.id("filter-menu");
+    private static final By FIRST_RESULT = By.xpath("//*[@id=\"video-title\"]");
+
     private WebDriver driver;
     private WebDriverWait wait;
-
-    private String url = "https://www.youtube.com/";
     private String resultUrl;
-
-    private By searchField = By.xpath("//input[@id=\"search\"]");
-    private By filterButton = By.id("filter-menu");
-    private By firstResult = By.xpath("//*[@id=\"video-title\"]");
-
+    
     public YouTubePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
     }
 
     public void getYouTubePage(){
-        driver.get(url);
+        driver.get(URL);
     }
 
     public void searchForMusic(String keywords){
-        wait.until(ExpectedConditions.elementToBeClickable(searchField)).sendKeys(keywords + Keys.ENTER);
+        wait.until(ExpectedConditions.elementToBeClickable(SEARCH_FIELD)).sendKeys(keywords + Keys.ENTER);
     }
 
     public void setResultUrl(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(filterButton));
-        resultUrl = wait.until(ExpectedConditions. visibilityOfElementLocated(firstResult)).getAttribute("href");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(FILTER_BUTTON));
+        resultUrl = wait.until(ExpectedConditions. visibilityOfElementLocated(FIRST_RESULT)).getAttribute("href");
     }
 
     public String getResultUrl() {

@@ -9,16 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FoursquareSearchPage {
 
+    private static final String URL = "https://foursquare.com/city-guide";
+    private static final By CITY_INPUT_FIELD = By.id("headerLocationInput");
+    private static final By CATEGORY_INPUT_FIELD = By.id("headerBarSearch");
+    private static final By SUBMIT_BUTTON = By.className("submitButton");
+    private static final By firstResultLink = By.xpath("//*[@id=\"results\"]/ul/li[2]//a");
+
     private WebDriver driver;
     private WebDriverWait wait;
-
-    private final String url = "https://foursquare.com/city-guide";
     private String restaurantName;
-
-    private By cityInputField = By.id("headerLocationInput");
-    private By categoryInputField = By.id("headerBarSearch");
-    private By submitButton = By.className("submitButton");
-    private By firstResultLink = By.xpath("//*[@id=\"results\"]/ul/li[2]//a");
 
     public FoursquareSearchPage(WebDriver driver){
         this.driver = driver;
@@ -26,15 +25,15 @@ public class FoursquareSearchPage {
     }
 
     public void getFoursquareSearchPage(){
-        driver.get(url);
+        driver.get(URL);
     }
 
     public void searchForCategoryAndCity(String category, String city){
-        WebElement cityField = wait.until(ExpectedConditions.visibilityOfElementLocated(cityInputField));
+        WebElement cityField = wait.until(ExpectedConditions.visibilityOfElementLocated(CITY_INPUT_FIELD));
         cityField.clear();
         cityField.sendKeys(city);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(categoryInputField)).sendKeys(category);
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CATEGORY_INPUT_FIELD)).sendKeys(category);
+        wait.until(ExpectedConditions.elementToBeClickable(SUBMIT_BUTTON)).click();
     }
 
     public void setRestaurantName(){
