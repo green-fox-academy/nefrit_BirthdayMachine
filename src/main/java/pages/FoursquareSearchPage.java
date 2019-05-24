@@ -1,9 +1,8 @@
 package pages;
 
+import commons.DriverUtility;
 import commons.GlobalVariables;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,7 +12,7 @@ public class FoursquareSearchPage {
     private static final By CITY_INPUT_FIELD = By.id("headerLocationInput");
     private static final By CATEGORY_INPUT_FIELD = By.id("headerBarSearch");
     private static final By SUBMIT_BUTTON = By.className("submitButton");
-    private static final By firstResultLink = By.xpath("//*[@id=\"results\"]/ul/li[2]//a");
+    private static final By FIRST_RESULT_LINK = By.xpath("//*[@id=\"results\"]/ul/li[2]//a");
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -25,11 +24,17 @@ public class FoursquareSearchPage {
     }
 
     public void getFoursquareSearchPage(){
-        driver.get(URL);
+            driver.get(URL);
     }
 
     public void searchForCategoryAndCity(String category, String city){
-        WebElement cityField = wait.until(ExpectedConditions.visibilityOfElementLocated(CITY_INPUT_FIELD));
+        WebElement cityField;
+        try {
+            cityField = wait.until(ExpectedConditions.visibilityOfElementLocated(CITY_INPUT_FIELD));
+        } catch (NoSuchElementException | TimeoutException e) {
+            DriverUtility.refreshPage(driver);
+        }
+        cityField = wait.until(ExpectedConditions.visibilityOfElementLocated(CITY_INPUT_FIELD));
         cityField.clear();
         cityField.sendKeys(city);
         wait.until(ExpectedConditions.visibilityOfElementLocated(CATEGORY_INPUT_FIELD)).sendKeys(category);
@@ -37,7 +42,7 @@ public class FoursquareSearchPage {
     }
 
     public void setRestaurantName(){
-        restaurantName = wait.until(ExpectedConditions.visibilityOfElementLocated(firstResultLink)).getText();
+        restaurantName = wait.until(ExpectedConditions.visibilityOfElementLocated(FIRST_RESULT_LINK)).getText();
     }
 
     public String getRestaurantName() {
