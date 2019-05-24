@@ -45,9 +45,9 @@ public class EKepeslapPage {
     private static final By POSTCARD_BACKGROUND_MENU = By.xpath("//*[@id=\"tartalom\"]/table/tbody/tr/td[1]/form/div/div[15]/div[1]/label/select");
     private static final By POSTCARD_BACKGROUND_SONG = By.xpath("//*[@id=\"tartalom\"]/table/tbody/tr/td[1]/form/div/div[17]/div/label/select");
 
-    private static WebDriver driver;
+    private WebDriver driver;
 
-    EKepeslapPage(WebDriver extDriver) {
+    public EKepeslapPage(WebDriver extDriver) {
         this.driver = extDriver;
     }
 
