@@ -1,6 +1,7 @@
 package commons;
 
 import org.openqa.selenium.WebDriver;
+import pages.EKepeslapPage;
 
 import java.util.List;
 import java.util.Scanner;
@@ -31,4 +32,13 @@ public class AppManager {
         } while (chosenNumber <= 0 || chosenNumber > listOfFriends.size());
         chosenFriend = listOfFriends.get(chosenNumber - 1);
     }
+
+    public static void sendPostCardIfFriendHasEmailAddress() {
+        EKepeslapPage eKepeslapPage = new EKepeslapPage(driver2);
+        eKepeslapPage.sendPostCardToFriendsEmailAddress("Happy Birthday!!!",
+                "I wish you a Happy Birthday!", config.get("myname"),
+                AppManager.getChosenFriend(), facebookProfilePage.getEmailAddress(),
+                config.get("myname"), config.get("myemail") );
+    }
+
 }
