@@ -44,7 +44,7 @@ public class FacebookProfilePage {
 
     public void getFriendEmailAddressOnContactPage() {
         try {
-            this.emailAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_ADDRESS)).getText();
+            emailAddress = wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_ADDRESS)).getText();
         } catch (NoSuchElementException | TimeoutException e) {
             System.out.println("Couldn't find email address.");
             e.printStackTrace();
@@ -54,7 +54,7 @@ public class FacebookProfilePage {
 
     public void getFriendPlaceOfResidenceOnContactPage() {
         try {
-            this.placeOfResidence = wait.until(ExpectedConditions.visibilityOfElementLocated(PLACE_OF_RESIDENCE)).getText();
+            placeOfResidence = wait.until(ExpectedConditions.visibilityOfElementLocated(PLACE_OF_RESIDENCE)).getText();
         } catch (NoSuchElementException | TimeoutException e) {
             System.out.println("Couldn't find place of residence. Default will be Budapest.");
             e.printStackTrace();
