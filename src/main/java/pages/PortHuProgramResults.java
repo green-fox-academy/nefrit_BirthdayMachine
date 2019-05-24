@@ -16,21 +16,21 @@ public class PortHuProgramResults {
     private String eventTitle;
     private String evenStartTime;
 
-    private By resultOrderPopular = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
-    private By firstResult = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
-    private By address = By.className("address");
-    private By eventTitleBy = By.className("title");
-    private By eventStartTime = By.xpath("(//div[@class='showtime-box']//span)[2]");
+    private static final By RESULT_ORDER_POPULAR = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
+    private static final By FIRST_RESULT = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
+    private static final By ADDRESS = By.className("ADDRESS");
+    private static final By EVENT_TITLE_BY = By.className("title");
+    private static final By EVENT_START_TIME = By.xpath("(//div[@class='showtime-box']//span)[2]");
 
     public PortHuProgramResults(WebDriver driver) {
-        this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
         this.driver = driver;
+        this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
     }
 
     public void chooseMostPopularEvent() {
         wait.until(ExpectedConditions.titleIs(searchPageName));
-        driver.findElement(resultOrderPopular).click();
-        driver.findElement(firstResult).click();
+        driver.findElement(RESULT_ORDER_POPULAR).click();
+        driver.findElement(FIRST_RESULT).click();
     }
 
     public void setFields() {
@@ -39,17 +39,16 @@ public class PortHuProgramResults {
         setEventStartTime();
     }
 
-
     public void setEventAddress() {
-        eventAddress = driver.findElement(address).getText();
+        eventAddress = driver.findElement(ADDRESS).getText();
     }
 
     public void setEventTitle() {
-        eventTitle = driver.findElement(eventTitleBy).getText();
+        eventTitle = driver.findElement(EVENT_TITLE_BY).getText();
     }
 
     public void setEventStartTime() {
-        String startTime = driver.findElement(eventStartTime).getText();
+        String startTime = driver.findElement(EVENT_START_TIME).getText();
         String[] startTimeArray = startTime.split(" ");
         evenStartTime = startTimeArray[startTimeArray.length - 1];
     }
@@ -66,4 +65,3 @@ public class PortHuProgramResults {
         return evenStartTime;
     }
 }
-
