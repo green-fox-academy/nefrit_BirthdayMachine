@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class AppManager {
 
     private static String chosenFriend = "";
+    private static final String FOURSQUARE_SEARCH_CATEGORY = "food";
+    private static final String MUSIC_SEARCH_KEYWORD = "születésnapi zenék";
 
     public static String getChosenFriend() {
         return chosenFriend;
@@ -41,5 +43,13 @@ public class AppManager {
             eKepeslapPage.sendPostCardToFriendsEmailAddress(postcardTitle, postcardBodyMessage, signature,
                     receiverUsername, receiverEmail, ownUsername, ownEmail);
         }
+    }
+
+    public static String getFoursquareSearchCategory(){
+        return FOURSQUARE_SEARCH_CATEGORY;
+    }
+
+    public static String getMusicSearchKeyword(){
+        return MUSIC_SEARCH_KEYWORD;
     }
 }

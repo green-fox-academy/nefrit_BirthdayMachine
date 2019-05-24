@@ -65,7 +65,7 @@ public class App {
 
         //get most popular restaurant's name
         fsPage.getFoursquareSearchPage();
-        fsPage.searchForCategoryAndCity("food", facebookProfilePage.getPlaceOfResidence());
+        fsPage.searchForCategoryAndCity(AppManager.getFoursquareSearchCategory(), facebookProfilePage.getPlaceOfResidence());
         fsPage.setRestaurantName();
 
         //get restaurant's address
@@ -81,7 +81,7 @@ public class App {
 
         //searching for birthday music video
         yPage.getYouTubePage();
-        yPage.searchForMusic("születésnapi zenék");
+        yPage.searchForMusic(AppManager.getMusicSearchKeyword());
         yPage.setResultUrl();
         DriverUtility.quitSession(driver2);
 
