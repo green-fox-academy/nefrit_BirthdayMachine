@@ -10,20 +10,19 @@ import java.util.List;
 
 public class IdokepPage {
 
+    private static final String idokepUrl = "https://www.idokep.hu/";
+    private static final String partOfTheDay = "ma este";
+    private static final By DETAILS_LINK = By.linkText("részletek");
+    private static final By PART_OF_THE_DAY_COLUMNS = By.xpath("//*[@class='harminchat']//*[@class='napszak']");
+    private static final By TEMPERATURE_COLUMNS = By.xpath("//*[@class='harminchat']//*[@class='homerseklet']");
+
     private WebDriverWait wait;
     private WebDriver driver;
-
-    private String idokepUrl = "https://www.idokep.hu/";
-    private String partOfTheDay = "ma este";
     private int temperature;
 
-    private By detailsLink = By.linkText("részletek");
-    private By partOfTheDayColumns = By.xpath("//*[@class='harminchat']//*[@class='napszak']");
-    private By temperatureColumns = By.xpath("//*[@class='harminchat']//*[@class='homerseklet']");
-
     public IdokepPage(WebDriver driver) {
-        this.wait = new WebDriverWait(driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
         this.driver = driver;
+        this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
     }
 
     public void openIdokep() {
@@ -31,18 +30,17 @@ public class IdokepPage {
     }
 
     public void setTemperature() {
-        driver.findElement(detailsLink).click();
-        List<WebElement> columnPartOfTheDay = driver.findElements(partOfTheDayColumns);
+        driver.findElement(DETAILS_LINK).click();
+        List<WebElement> columnPartOfTheDay = driver.findElements(PART_OF_THE_DAY_COLUMNS);
         int numberOfColumn = 0;
         while (!columnPartOfTheDay.get(numberOfColumn).getText().equals(partOfTheDay)) {
             numberOfColumn++;
         }
-        String eveningTemperature = driver.findElements(temperatureColumns).get(numberOfColumn).getText();
+        String eveningTemperature = driver.findElements(TEMPERATURE_COLUMNS).get(numberOfColumn).getText();
         temperature = Integer.parseInt(eveningTemperature.split(" ")[0]);
     }
 
     public int getTemperature() {
         return temperature;
     }
-
 }
