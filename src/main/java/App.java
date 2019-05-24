@@ -13,8 +13,6 @@ public class App {
 
     private static WebDriver driver1;
     private static WebDriver driver2;
-    private static WebDriver driver3;
-    private static WebDriver driver4;
     private static Map<String, String> config = new HashMap<>();
 
     public static void main(String[] args) {
@@ -76,13 +74,8 @@ public class App {
         messageBuilder.setGreetingMessage();
         facebookProfilePage.sendMessageToFriend(messageBuilder.getGreetingMessage());
 
-
         driver2 = DriverUtility.startUp(driver2, config, false, true, true);
-
-
-
-        EKepeslapPage eKepeslapPage = new EKepeslapPage(driver2);
-        eKepeslapPage.sendPostCardToFriendsEmailAddress("Happy Birthday!!!",
+        AppManager.sendPostCardIfFriendHasEmailAddress(driver2,"Happy Birthday!!!",
                 "I wish you a Happy Birthday!", config.get("myname"),
                 AppManager.getChosenFriend(), facebookProfilePage.getEmailAddress(),
                 config.get("myname"), config.get("myemail") );
