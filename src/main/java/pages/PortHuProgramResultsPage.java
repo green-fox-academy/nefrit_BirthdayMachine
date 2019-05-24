@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PortHuProgramResults {
+public class PortHuProgramResultsPage {
 
     private static final By RESULT_ORDER_POPULAR = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
     private static final By FIRST_RESULT = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
@@ -23,7 +23,7 @@ public class PortHuProgramResults {
     private String evenStartTime;
 
 
-    public PortHuProgramResults(WebDriver driver) {
+    public PortHuProgramResultsPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, GlobalVariables.GENERAL_EXPLICIT_TIMEOUT);
     }
