@@ -31,19 +31,12 @@ public class FacebookBirthdayPage {
         this.listOfNamesOfPeople = new ArrayList<>();
     }
 
-    public List<WebElement> getListOfWebelementsOfPeople() {
-        return listOfWebelementsOfPeople;
-    }
-
     public List<String> getListOfNamesOfFriends() {
         return listOfNamesOfPeople;
     }
 
-    public void navigateToBirthdayPage() {
-        driver.get(BIRTHDAY_PAGE_URL);
-    }
-
     public void isThereBirthdayToday() {
+        navigateToBirthdayPage();
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(TODAYS_BIRTHDAY_INDICATOR));
         } catch (NoSuchElementException | TimeoutException e) {
@@ -68,6 +61,10 @@ public class FacebookBirthdayPage {
                 break;
             }
         }
+    }
+
+    private void navigateToBirthdayPage() {
+        driver.get(BIRTHDAY_PAGE_URL);
     }
 
     private void collectNamesFromWebelements() {
