@@ -50,7 +50,6 @@ public class FacebookBirthdayPage {
     public void getFriendsWhoHaveBirthdayTodayFromFacebok() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY));
         listOfWebelementsOfPeople = driver.findElements(PEOPLE_WHO_HAVE_BIRTHDAY_TODAY);
-        System.out.println("webelementlista mérete: " + listOfWebelementsOfPeople.size());
         collectNamesFromWebelements();
     }
 
