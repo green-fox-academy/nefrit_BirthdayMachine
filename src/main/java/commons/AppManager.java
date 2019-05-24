@@ -1,6 +1,7 @@
 package commons;
 
 import org.openqa.selenium.WebDriver;
+import pages.EKepeslapPage;
 
 import java.util.List;
 import java.util.Scanner;
@@ -30,5 +31,15 @@ public class AppManager {
             chosenNumber = scanner.nextInt();
         } while (chosenNumber <= 0 || chosenNumber > listOfFriends.size());
         chosenFriend = listOfFriends.get(chosenNumber - 1);
+    }
+
+    public static void sendPostCardIfFriendHasEmailAddress(WebDriver driver, String postcardTitle, String postcardBodyMessage,
+                                                           String signature, String receiverUsername, String receiverEmail,
+                                                           String ownUsername, String ownEmail) {
+        if (!receiverEmail.equals("")) {
+            EKepeslapPage eKepeslapPage = new EKepeslapPage(driver);
+            eKepeslapPage.sendPostCardToFriendsEmailAddress(postcardTitle, postcardBodyMessage, signature,
+                    receiverUsername, receiverEmail, ownUsername, ownEmail);
+        }
     }
 }

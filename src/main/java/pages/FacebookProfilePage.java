@@ -49,7 +49,6 @@ public class FacebookProfilePage {
             System.out.println("Couldn't find email address.");
             e.printStackTrace();
         }
-        System.out.println(emailAddress);
     }
 
     public void getFriendPlaceOfResidenceOnContactPage() {

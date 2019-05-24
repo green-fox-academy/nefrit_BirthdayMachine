@@ -13,8 +13,6 @@ public class App {
 
     private static WebDriver driver1;
     private static WebDriver driver2;
-    private static WebDriver driver3;
-    private static WebDriver driver4;
     private static Map<String, String> config = new HashMap<>();
 
     public static void main(String[] args) {
@@ -50,11 +48,11 @@ public class App {
         DriverUtility.quitSession(driver2);
 
 
-        driver3 = DriverUtility.startUp(driver3, config, false, true, true);
-        FoursquareSearchPage fsPage = new FoursquareSearchPage(driver3);
-        GooglePage gPage = new GooglePage(driver3);
-        YouTubePage yPage = new YouTubePage(driver3);
-        GoogleMapsPage gmPage = new GoogleMapsPage(driver3);
+        driver2 = DriverUtility.startUp(driver2, config, false, true, true);
+        FoursquareSearchPage fsPage = new FoursquareSearchPage(driver2);
+        GooglePage gPage = new GooglePage(driver2);
+        YouTubePage yPage = new YouTubePage(driver2);
+        GoogleMapsPage gmPage = new GoogleMapsPage(driver2);
         fsPage.getFoursquareSearchPage();
         fsPage.searchForCategoryAndCity("food", facebookProfilePage.getPlaceOfResidence());
         fsPage.setRestaurantName();
@@ -68,7 +66,7 @@ public class App {
         yPage.getYouTubePage();
         yPage.searchForMusic("születésnapi zenék");
         yPage.setResultUrl();
-        DriverUtility.quitSession(driver3);
+        DriverUtility.quitSession(driver2);
 
 
         MessageBuilder messageBuilder = new MessageBuilder(yPage.getResultUrl(), portHuProgramResults.getEventTitle(),
@@ -76,12 +74,11 @@ public class App {
         messageBuilder.setGreetingMessage();
         facebookProfilePage.sendMessageToFriend(messageBuilder.getGreetingMessage());
 
-
-        driver4 = DriverUtility.startUp(driver4, config, false, true, true);
-        EKepeslapPage eKepeslapPage = new EKepeslapPage(driver4);
-        eKepeslapPage.sendPostCardToFriendsEmailAddress("Happy Birthday!!!",
+        driver2 = DriverUtility.startUp(driver2, config, false, true, true);
+        AppManager.sendPostCardIfFriendHasEmailAddress(driver2,"Happy Birthday!!!",
                 "I wish you a Happy Birthday!", config.get("myname"),
                 AppManager.getChosenFriend(), facebookProfilePage.getEmailAddress(),
                 config.get("myname"), config.get("myemail") );
+        DriverUtility.quitSession(driver2);
     }
 }
