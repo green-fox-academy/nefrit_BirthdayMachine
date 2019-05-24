@@ -18,7 +18,7 @@ public class PortHuProgramResults {
 
     private static final By RESULT_ORDER_POPULAR = By.xpath("//*[@id='s']//label[@title='Népszerű']/span");
     private static final By FIRST_RESULT = By.xpath("//*[@id='results']/li[1]//a[@class='title']");
-    private static final By ADDRESS = By.className("ADDRESS");
+    private static final By ADDRESS = By.className("address");
     private static final By EVENT_TITLE_BY = By.className("title");
     private static final By EVENT_START_TIME = By.xpath("(//div[@class='showtime-box']//span)[2]");
 
