@@ -40,15 +40,15 @@ public class PortHuProgramResultsPage {
         setEventStartTime();
     }
 
-    public void setEventAddress() {
+    private void setEventAddress() {
         eventAddress = driver.findElement(ADDRESS).getText();
     }
 
-    public void setEventTitle() {
+    private void setEventTitle() {
         eventTitle = driver.findElement(EVENT_TITLE_BY).getText();
     }
 
-    public void setEventStartTime() {
+    private void setEventStartTime() {
         String startTime = driver.findElement(EVENT_START_TIME).getText();
         String[] startTimeArray = startTime.split(" ");
         evenStartTime = startTimeArray[startTimeArray.length - 1];
