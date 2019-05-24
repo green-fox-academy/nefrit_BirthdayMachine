@@ -33,12 +33,13 @@ public class AppManager {
         chosenFriend = listOfFriends.get(chosenNumber - 1);
     }
 
-    public static void sendPostCardIfFriendHasEmailAddress() {
-        EKepeslapPage eKepeslapPage = new EKepeslapPage(driver2);
-        eKepeslapPage.sendPostCardToFriendsEmailAddress("Happy Birthday!!!",
-                "I wish you a Happy Birthday!", config.get("myname"),
-                AppManager.getChosenFriend(), facebookProfilePage.getEmailAddress(),
-                config.get("myname"), config.get("myemail") );
+    public static void sendPostCardIfFriendHasEmailAddress(WebDriver driver, String postcardTitle, String postcardBodyMessage,
+                                                           String signature, String receiverUsername, String receiverEmail,
+                                                           String ownUsername, String ownEmail) {
+        if (!receiverEmail.equals("")) {
+            EKepeslapPage eKepeslapPage = new EKepeslapPage(driver);
+            eKepeslapPage.sendPostCardToFriendsEmailAddress(postcardTitle, postcardBodyMessage, signature,
+                    receiverUsername, receiverEmail, ownUsername, ownEmail);
+        }
     }
-
 }
