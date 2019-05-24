@@ -1,10 +1,8 @@
 package pages;
 
 import commons.GlobalVariables;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -208,7 +206,8 @@ public class EKepeslapPage {
                 new Select(driver.findElement(menu)).selectByIndex(1 + (int)(Math.random() * menuMaxIndex));
                 break;
             } catch (ElementClickInterceptedException e) {
-                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -20)");
+                Actions action = new Actions(driver);
+                action.sendKeys(Keys.PAGE_DOWN).build().perform();
             }
         }
     }
